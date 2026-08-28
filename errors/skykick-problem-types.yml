@@ -1,0 +1,54 @@
+generated: '2026-08-28'
+method: probed
+source: live anonymous requests to https://apis.cloudservices.connectwise.com on 2026-08-28
+api: SkyKick Partner Integration API
+format: proprietary
+rfc9457: false
+note: >-
+  SkyKick publishes no OpenAPI and no error-code reference on any anonymously
+  readable page, so this catalog cannot be derived from a spec or searched from
+  docs. What follows is only what was actually observed on the wire against the
+  live gateway. It is deliberately short — an honest two-entry catalog of observed
+  responses, not a guessed taxonomy. The full error surface is behind the developer
+  portal sign-in.
+envelopes:
+- layer: gateway
+  producer: Azure API Management
+  media_type: application/json
+  fields: [statusCode, message]
+- layer: backend
+  producer: ASP.NET Web API
+  media_type: application/json; charset=utf-8
+  fields: [Message]
+problem_types:
+- id: resource-not-found
+  status: 404
+  layer: gateway
+  title: Resource not found
+  body: '{ "statusCode": 404, "message": "Resource not found" }'
+  meaning: >-
+    The requested path is not routed by the API Management instance. Returned for
+    every unmapped path on apis.cloudservices.connectwise.com, including the
+    /.well-known/* probes and /openapi.json.
+  remediation: Check the path against the API reference in the developer portal.
+  observed_at: https://apis.cloudservices.connectwise.com/openapi.json
+- id: authorization-denied
+  status: 401
+  layer: backend
+  title: Authorization has been denied for this request.
+  body: '{"Message":"Authorization has been denied for this request."}'
+  headers:
+    WWW-Authenticate: Bearer
+  meaning: >-
+    The path is routed and the resource exists, but no valid bearer token was
+    presented. Observed on both /whoami and /Backup, which is how this profile
+    established that those routes are live rather than absent.
+  remediation: >-
+    Obtain an access token from /auth/token using the client-credentials grant and
+    resend as "Authorization: Bearer <token>", together with the
+    Ocp-Apim-Subscription-Key header.
+  observed_at: https://apis.cloudservices.connectwise.com/whoami
+gaps:
+- No published error-code reference.
+- No application/problem+json (RFC 9457) support observed.
+- Field casing is inconsistent between the gateway and backend envelopes.

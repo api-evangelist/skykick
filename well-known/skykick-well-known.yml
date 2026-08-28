@@ -1,0 +1,119 @@
+generated: '2026-08-28'
+method: probed
+source: live GET of /.well-known/* on every SkyKick / ConnectWise Cloud Services host
+note: >-
+  Recorded absence. Every /.well-known/ path was probed on all four hosts in the
+  SkyKick surface and every one returned 404. No WellKnown or SecurityTxt pointer
+  is emitted in apis.yml, because nothing is served. skykick.com itself answers a
+  generic "Site Not Configured | 404 Not Found" page for every path — the SkyKick
+  marketing site was retired after the September 2024 ConnectWise acquisition and
+  www.skykick.com no longer resolves in DNS.
+hosts:
+- host: skykick.com
+  note: apex resolves to 104.198.32.104 but serves a "Site Not Configured" 404 for all paths; www.skykick.com does not resolve
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: apis.cloudservices.connectwise.com
+  note: the live Azure API Management gateway serving the SkyKick Partner Integration API
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: skykick.developer.azure-api.net
+  note: the ConnectWise Developer Portal, running on SkyKick's own Azure APIM instance
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: developers.cloudservices.connectwise.com
+  note: vanity hostname for the same APIM developer portal
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null

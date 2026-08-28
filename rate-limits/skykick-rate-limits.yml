@@ -1,0 +1,44 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  https://skykick.developer.azure-api.net/getstarted (documentation search) plus
+  live anonymous responses from https://apis.cloudservices.connectwise.com
+note: >-
+  No rate limits are published, and none could be observed. The provider's Get
+  Started page — the only substantive anonymously readable API documentation —
+  documents authentication and a sample call and says nothing about quotas,
+  throttling or backoff. Live anonymous 401 and 404 responses from the gateway
+  carried no RateLimit-*, X-RateLimit-* or Retry-After header. The API runs on
+  Azure API Management, where rate-limit and quota policies are configured per
+  product and per subscription and emit headers only when the policy is written to
+  do so, so limits may well be enforced against a real subscription key without
+  being visible to an anonymous caller. An honest zero: checked, nothing found.
+limit_count: 0
+limits: []
+headers_observed: []
+exhaustion_status_code: null
+documented: false
+probes:
+- url: https://apis.cloudservices.connectwise.com/whoami
+  status: 401
+  date: '2026-08-28'
+  rate_limit_headers: none
+- url: https://apis.cloudservices.connectwise.com/Backup
+  status: 401
+  date: '2026-08-28'
+  rate_limit_headers: none
+- url: https://apis.cloudservices.connectwise.com/
+  status: 404
+  date: '2026-08-28'
+  rate_limit_headers: none
+gateway:
+  platform: Azure API Management
+  note: >-
+    APIM supports rate-limit-by-key and quota-by-key policies whose headers are
+    opt-in. Absence of headers here is evidence about what is DISCLOSED, not proof
+    that no limit is enforced.
+recommendation: >-
+  Publishing the per-subscription call and quota limits, and emitting RateLimit-*
+  headers on responses, would be the single cheapest agent-readiness improvement
+  available to this API — an automated integrator currently has no runtime signal
+  to back off against.

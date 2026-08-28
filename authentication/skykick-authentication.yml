@@ -1,0 +1,75 @@
+generated: '2026-08-28'
+method: searched
+source: https://skykick.developer.azure-api.net/getstarted
+docs: https://skykick.developer.azure-api.net/getstarted
+api: SkyKick Partner Integration API
+base_url: https://apis.cloudservices.connectwise.com
+note: >-
+  Derived from the provider's own public Get Started page rather than from an
+  OpenAPI document — SkyKick publishes no machine-readable contract. The page is
+  served by the ConnectWise Developer Portal on SkyKick's own Azure API Management
+  instance (skykick.developer.azure-api.net) and is the only substantive
+  anonymously readable API documentation the provider still serves after the
+  September 2024 ConnectWise acquisition retired skykick.com.
+summary: >-
+  Two credentials are required on every call. An Azure API Management subscription
+  key identifies the calling application to the gateway, and an OAuth 2.0
+  client-credentials bearer token identifies the partner. Both are issued from the
+  Cloud Services partner portal and require an administrator to enable "Developer
+  Access" on a user before any of it can be obtained.
+schemes:
+- id: apim_subscription_key
+  type: apiKey
+  in: header
+  name: Ocp-Apim-Subscription-Key
+  required: true
+  description: >-
+    Azure API Management subscription key. Retrieved from the Cloud Services
+    portal under Admin > User Profile > Developer API Access, where each
+    subscription (e.g. the Partner subscription) exposes a Show link that reveals
+    the key. Sent on both the token request and every resource request.
+  evidence: https://skykick.developer.azure-api.net/getstarted
+- id: oauth2_client_credentials
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://apis.cloudservices.connectwise.com/auth/token
+  required: true
+  description: >-
+    OAuth 2.0 client credentials grant (RFC 6749 section 4.4). The token request
+    is an application/x-www-form-urlencoded POST carrying grant_type=client_credentials
+    and a scope, authenticated with HTTP Basic where the username is the ClientId
+    and the password is the Secret. The resulting token is sent as
+    "Authorization: Bearer <token>" on resource calls.
+  request:
+    method: POST
+    url: https://apis.cloudservices.connectwise.com/auth/token
+    content_type: application/x-www-form-urlencoded
+    headers:
+    - Ocp-Apim-Subscription-Key
+    - 'Authorization: Basic base64(ClientId:Secret)'
+    body_params:
+    - grant_type=client_credentials
+    - scope=Partner
+  scopes:
+  - Partner
+  - Distributor
+  evidence: https://skykick.developer.azure-api.net/getstarted
+credential_provisioning:
+  gated: true
+  steps:
+  - Sign in to the Cloud Services portal with an Administrator account.
+  - Admin > Manage Users > Add New User, with the Developer Access checkbox set.
+  - The new user signs in at developers.cloudservices.connectwise.com.
+  - Admin > User Profile > Developer API Access exposes the ClientId, Secret and subscription keys.
+  portal: https://portal.cloudservices.connectwise.com/
+  developer_portal: https://developers.cloudservices.connectwise.com
+  note: >-
+    There is no self-service signup. Credentials can only be minted by an
+    administrator of an existing partner tenant, which is why this profile records
+    the API as gated rather than public.
+verification:
+  identity_endpoint: https://apis.cloudservices.connectwise.com/whoami
+  probed: '2026-08-28'
+  anonymous_status: 401
+  anonymous_body: '{"Message":"Authorization has been denied for this request."}'
+  www_authenticate: Bearer

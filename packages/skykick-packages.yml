@@ -1,0 +1,95 @@
+generated: '2026-08-28'
+method: searched
+source: registry.npmjs.org, pypi.org, rubygems.org, api.nuget.org, powershellgallery.com, api.github.com/orgs/SkyKick
+api: SkyKick Partner Integration API
+note: >-
+  SkyKick ships NO first-party client SDK for its API, in any language, on any
+  registry. Every registry was queried unauthenticated on 2026-08-28: npm search
+  for "skykick" returned zero packages, PyPI has no skykick project (404), and the
+  only two SkyKick-authored packages that exist anywhere are a .NET logging helper
+  and a set of forked OSS libraries in the GitHub org — none of which call the
+  Partner Integration API. The three packages that DO wrap the API are all written
+  by third-party MSP engineers. No `SDKs` pointer is wired into apis.yml as a
+  result: sdk_count is a measure of what the provider publishes for its API, and
+  crediting a community wrapper or a logfmt logger to SkyKick would be false.
+official_api_sdk_count: 0
+package_count: 4
+packages:
+- name: skykick
+  registry: rubygems
+  url: https://rubygems.org/gems/skykick
+  source: https://github.com/jancotanis/skykick
+  language: ruby
+  official: false
+  api_client: true
+  author: Janco Tanis
+  license: MIT
+  version: 0.3.0
+  published: '2025-09-01'
+  downloads: 3048
+  description: >-
+    A Ruby wrapper for the SkyKick backup Portal REST APIs (read-only). Covers
+    subscriptions, autodiscover, datacenters and Exchange mailboxes.
+  note: >-
+    Community-maintained and still current — released after the ConnectWise
+    acquisition, which makes it the freshest evidence anywhere that the Partner
+    Integration API is live and unchanged. It is also the only wrapper with a
+    2025-or-later release.
+- name: SkykickAPI
+  registry: powershellgallery
+  url: https://www.powershellgallery.com/packages/SkykickAPI
+  source: https://github.com/BoSen29/SkykickAPI
+  language: powershell
+  official: false
+  api_client: true
+  author: Pal Sola
+  version: 1.1.1
+  published: '2019-12-09'
+  description: PowerShell module for the SkyKick API.
+  note: >-
+    Last released 2019 — six years before this probe and five years before the
+    ConnectWise acquisition. Treat as abandoned.
+- name: SkyKick.Extensions.Logging.Console.Logfmt
+  registry: nuget
+  url: https://www.nuget.org/packages/SkyKick.Extensions.Logging.Console.Logfmt
+  source: https://github.com/SkyKick/logfmt-dotnet
+  language: dotnet
+  official: true
+  api_client: false
+  author: Aida Crone
+  version: 1.0.0
+  published: '2021-10-05'
+  description: logfmt style logging for .NET console apps.
+  note: >-
+    First-party — published from SkyKick's own GitHub org — but an internal
+    engineering utility, not a client for the Partner Integration API. Recorded
+    for completeness and deliberately excluded from official_api_sdk_count.
+- name: skykick-scripts
+  registry: null
+  url: https://github.com/nmanzi/skykick-scripts
+  language: powershell
+  official: false
+  api_client: true
+  version: null
+  published: null
+  description: >-
+    A set of PowerShell scripts to assist with large / complex O365-to-O365
+    migrations with SkyKick.
+  note: >-
+    Distributed as a Git repository only, with no registry release and no tags, so
+    there is no version or publish date to read — a consumer cannot pin it either.
+    version and published are null because they were checked and found absent, not
+    because they were skipped.
+github_org:
+  url: https://github.com/SkyKick
+  public_repos: 24
+  created: '2015-10-14'
+  last_org_update: '2022-08-16'
+  note: >-
+    Real and first-party (location Seattle, WA; the org's own blog field still
+    points at the now-dead http://www.skykick.com). The 24 public repositories are
+    almost entirely forks of .NET and PowerShell OSS — NServiceBus transports,
+    Ninject extensions, RestSharp, MSAL.js, msgraph-sdk-powershell, PowerShell
+    itself. Two are original (Contextually, logfmt-dotnet, plus the SkyKick Helm
+    charts). None contains an OpenAPI document, a .proto, a WSDL, or a client
+    library for SkyKick's own API. Most were last pushed between 2016 and 2022.

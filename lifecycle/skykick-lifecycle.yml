@@ -1,0 +1,76 @@
+generated: '2026-08-28'
+method: searched
+source: https://status.connectwise.com/ + https://www.connectwise.com/company/press/releases/axcient-skykick-acquisition
+api: SkyKick Partner Integration API
+note: >-
+  SkyKick's own lifecycle surface is gone. The company was acquired by ConnectWise
+  in September 2024 and its products now ship as ConnectWise Cloud Backup and
+  ConnectWise SaaS Security. As of 2026-08-28 skykick.com returns a generic
+  "Site Not Configured | 404 Not Found" for every path and www.skykick.com does not
+  resolve, so any versioning, deprecation or SLA policy SkyKick once published at
+  that domain is no longer retrievable. What is recorded here is the successor
+  surface, and every claim names the ConnectWise page it came from.
+company_lifecycle:
+  status: acquired
+  acquirer: ConnectWise, LLC
+  announced: '2024-09'
+  announcement: https://www.connectwise.com/company/press/releases/axcient-skykick-acquisition
+  successor_products:
+  - name: ConnectWise Cloud Backup
+    url: https://www.connectwise.com/platform/bcdr/cloud-backup
+  - name: ConnectWise SaaS Security
+    url: https://www.connectwise.com/platform/saas-security
+  brand_domain:
+    domain: skykick.com
+    probed: '2026-08-28'
+    status: 404
+    body_title: Site Not Configured | 404 Not Found
+    www_resolves: false
+    mx: skykick-com.mail.protection.outlook.com
+    note: >-
+      The zone is still administered (Azure DNS nameservers, live Microsoft 365 MX,
+      SPF and several domain-verification TXT records) but no web content is served
+      and no subdomain of skykick.com resolves — status., docs., help., trust.,
+      developers., api. were all probed and all failed to resolve.
+status_page:
+  present: true
+  url: https://status.connectwise.com/
+  platform: status.io
+  probed: '2026-08-28'
+  http_status: 200
+  components_covering_skykick_products:
+  - Cloud Backup
+  - SaaS Security & Cloud Automation
+  - Cloud Services Portal
+  note: >-
+    The former SkyKick services are monitored by name as first-class components on
+    the ConnectWise status page, which is why this pointer is attributed here.
+versioning:
+  policy_published: false
+  scheme: unknown
+  note: >-
+    No version segment appears in any published path and no versioning policy is
+    readable anonymously.
+deprecation:
+  policy_published: false
+  sunset_header: unknown
+  rfc8594: unknown
+  note: >-
+    No deprecation policy, Sunset/Deprecation header commitment, or end-of-life
+    notice is published on any anonymously readable page. Not wired as a
+    Deprecation pointer in apis.yml for exactly that reason.
+sla:
+  published: false
+  note: >-
+    Service commitments live in the ConnectWise Master Agreement
+    (https://www.connectwise.com/company/terms), not on a public API SLA page.
+roadmap:
+  present: false
+  url: https://www.connectwise.com/roadmap
+  probed: '2026-08-28'
+  http_status: 302
+  redirects_to: https://university.connectwise.com/university/Authentication/Default.aspx
+  note: >-
+    A product roadmap exists but is gated behind the ConnectWise University sign-in,
+    so no Roadmap pointer is emitted.
+deprecated_operations: []

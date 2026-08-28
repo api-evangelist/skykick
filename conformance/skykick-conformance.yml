@@ -1,0 +1,109 @@
+generated: '2026-08-28'
+method: searched
+source: https://www.connectwise.com/company/trust/compliance + https://skykick.developer.azure-api.net/getstarted
+api: SkyKick Partner Integration API
+note: >-
+  Standards conformance is asserted only where a provider page states it or a live
+  probe demonstrated it. SkyKick publishes no OpenAPI, so nothing here is derived
+  from a spec. The certification entries are quoted from the ConnectWise Trust
+  Center compliance page, which names the former SkyKick services explicitly rather
+  than covering them by implication.
+standards:
+- id: oauth2
+  name: OAuth 2.0 (RFC 6749)
+  conforms: true
+  profile: client_credentials grant (section 4.4)
+  evidence: >-
+    The provider's Get Started page documents a POST to
+    https://apis.cloudservices.connectwise.com/auth/token with
+    Content-Type: application/x-www-form-urlencoded, grant_type=client_credentials,
+    a scope parameter, and HTTP Basic client authentication using ClientId:Secret.
+  source: https://skykick.developer.azure-api.net/getstarted
+- id: rfc6750
+  name: OAuth 2.0 Bearer Token Usage (RFC 6750)
+  conforms: true
+  evidence: >-
+    Resource calls carry "Authorization: Bearer <token>", and an anonymous GET of
+    /whoami returned 401 with "WWW-Authenticate: Bearer" (probed 2026-08-28).
+  source: https://apis.cloudservices.connectwise.com/whoami
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration returned 404 on all four SkyKick /
+    ConnectWise Cloud Services hosts (probed 2026-08-28).
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returned 404 on every host (probed 2026-08-28).
+- id: rfc9457
+  name: Problem Details for HTTP APIs (RFC 9457)
+  conforms: false
+  evidence: >-
+    Observed error bodies are proprietary JSON objects
+    ({"statusCode":..,"message":..} at the gateway, {"Message":".."} at the
+    backend) served as application/json, not application/problem+json.
+- id: rfc9116
+  name: security.txt (RFC 9116)
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on every host (probed 2026-08-28).
+- id: openapi
+  name: OpenAPI Specification
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document is published. Every candidate path was probed on
+    the API host, both developer-portal hosts and the partner portal; the Azure APIM
+    developer-portal data API returned an empty API list to an anonymous caller
+    ({"value":[],"nextLink":null}).
+- id: pagination
+  name: Documented pagination
+  conforms: false
+  evidence: Not documented on any anonymously readable page.
+- id: idempotency
+  name: Documented idempotency
+  conforms: false
+  evidence: >-
+    No idempotency key or replay guarantee is documented anonymously. Recorded as
+    not-demonstrated rather than absent — the gated reference may document it.
+domain_standard:
+  applicable: false
+  note: >-
+    Microsoft 365 backup and migration for managed service providers has no
+    market-wide interchange standard of the SCIM/OData/HL7/ISO-20022 kind. The
+    relevant interface is the Microsoft Graph / Exchange Online API surface SkyKick
+    consumes on the customer's behalf, which is a dependency rather than a standard
+    this contract declares. Reward-only check: no domain standard is claimed and
+    none is invented.
+certifications:
+- id: iso-27001
+  name: ISO/IEC 27001:2013
+  scope: ConnectWise Cloud Backup and ConnectWise SaaS Security (the former SkyKick services)
+  verified: true
+  evidence: >-
+    "The ConnectWise Cloud Backup and ConnectWise SaaS Security services, acquired
+    by ConnectWise in September 2024, have been certified against the following
+    standards: ISO 27001:2013, ISO 27701:2019, and Cloud Security Alliance STAR
+    Level 2 certification."
+  source: https://www.connectwise.com/company/trust/compliance
+- id: iso-27701
+  name: ISO/IEC 27701:2019
+  scope: ConnectWise Cloud Backup and ConnectWise SaaS Security
+  verified: true
+  source: https://www.connectwise.com/company/trust/compliance
+- id: csa-star-level-2
+  name: Cloud Security Alliance STAR Level 2
+  scope: ConnectWise Cloud Backup and ConnectWise SaaS Security
+  verified: true
+  source: https://www.connectwise.com/company/trust/compliance
+- id: soc-2
+  name: SOC 2
+  scope: ConnectWise Data Protection Profile (organization-level, reports available on request)
+  verified: true
+  note: >-
+    ConnectWise publishes SOC 2 by profile — Business Management, Cybersecurity
+    Management, Data Protection, Unified Monitoring and Management — with reports
+    released to partners on request to Compliance@ConnectWise.com. The compliance
+    page does not name Cloud Backup / SaaS Security inside a specific SOC 2 profile,
+    so the scope is recorded at the profile level rather than claimed for this API.
+  source: https://www.connectwise.com/company/trust/compliance
+certification_request_contact: Compliance@ConnectWise.com

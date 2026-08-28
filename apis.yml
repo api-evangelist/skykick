@@ -1,23 +1,124 @@
 aid: skykick
 name: SkyKick
-description: 'SkyKick is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'SkyKick is a Seattle-based cloud automation company whose Microsoft 365
+  migration, cloud backup, SaaS security and cloud automation products for managed
+  service providers were acquired by ConnectWise in September 2024. The SkyKick brand''s
+  own domain no longer serves a website — skykick.com answers HTTP 404 "Site Not Configured"
+  and www.skykick.com no longer resolves — and the products now ship as ConnectWise
+  Cloud Backup and ConnectWise SaaS Security. The SkyKick Partner Integration API is
+  still live, on ConnectWise Cloud Services: an Azure API Management gateway at
+  apis.cloudservices.connectwise.com, fronted by the ConnectWise Developer Portal
+  running on SkyKick''s own APIM instance (skykick.developer.azure-api.net, also served
+  as developers.cloudservices.connectwise.com). Authentication is OAuth 2.0 client
+  credentials plus an Azure APIM subscription key. The API reference itself is gated:
+  developer access must be provisioned by an administrator inside the Cloud Services
+  partner portal, so no OpenAPI, AsyncAPI, MCP server or agent card is published
+  anonymously.'
+image: https://avatars.githubusercontent.com/u/15131071?v=4
 url: https://raw.githubusercontent.com/api-evangelist/skykick/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-28'
 modified: '2026-08-28'
 tags:
 - Company
-apis: []
+- Backup
+- Migration
+- Microsoft 365
+- Managed Service Providers
+- SaaS Security
+- Cloud Automation
+- Data Protection
+- Azure API Management
+apis:
+- name: SkyKick Partner Integration API
+  description: 'The Partner Integration API is the SkyKick / ConnectWise Cloud Services
+    partner-facing REST API. The provider''s own Get Started page documents an OAuth
+    2.0 client-credentials token exchange at /auth/token with the scopes Partner and
+    Distributor, an Azure API Management subscription key sent as Ocp-Apim-Subscription-Key,
+    and a /whoami identity call. Backup resources (subscriptions, autodiscover,
+    datacenters, Exchange mailboxes) sit under /Backup. The gateway answers live but
+    every resource requires authorization; the operation-level reference is behind
+    the developer portal sign-in.'
+  humanURL: https://skykick.developer.azure-api.net/getstarted
+  baseURL: https://apis.cloudservices.connectwise.com
+  tags:
+  - Backup
+  - Microsoft 365
+  - Partner Integration
+  - OAuth
+  properties:
+  - type: Authentication
+    url: authentication/skykick-authentication.yml
+  - type: OAuthScopes
+    url: scopes/skykick-scopes.yml
+  - type: Conventions
+    url: conventions/skykick-conventions.yml
+  - type: ErrorCatalog
+    url: errors/skykick-problem-types.yml
+  - type: GettingStarted
+    url: https://skykick.developer.azure-api.net/getstarted
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/skykick-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/skykick_stock/
+  url: https://www.connectwise.com/platform/bcdr/cloud-backup
+- type: DeveloperPortal
+  url: https://skykick.developer.azure-api.net/
+- type: GettingStarted
+  url: https://skykick.developer.azure-api.net/getstarted
+- type: Login
+  url: https://portal.cloudservices.connectwise.com/
+- type: Support
+  url: https://www.connectwise.com/support
+- type: GitHubOrganization
+  url: https://github.com/SkyKick
+- type: StatusPage
+  url: https://status.connectwise.com/
+- type: Pricing
+  url: https://www.connectwise.com/pricing
+- type: TermsOfService
+  url: https://www.connectwise.com/company/terms
+- type: PrivacyPolicy
+  url: https://www.connectwise.com/company/privacy-policy
+- type: TrustCenter
+  url: https://trust.connectwise.com/
+- type: Authentication
+  url: authentication/skykick-authentication.yml
+- type: OAuthScopes
+  url: scopes/skykick-scopes.yml
+- type: Conventions
+  url: conventions/skykick-conventions.yml
+- type: ErrorCatalog
+  url: errors/skykick-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/skykick-lifecycle.yml
+- type: Conformance
+  url: conformance/skykick-conformance.yml
+- type: Compliance
+  url: https://www.connectwise.com/company/trust/compliance
+- type: VulnerabilityDisclosure
+  url: security/skykick-vulnerability-disclosure.yml
+- type: Security
+  url: security/skykick-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/skykick-trust-center.yml
+- type: Packages
+  url: packages/skykick-packages.yml
+- type: Plans
+  url: plans/skykick-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/skykick-rate-limits.yml
+- type: LLMsTxt
+  url: llms/skykick-llms.txt
+x-enrichment:
+  date: '2026-08-28'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

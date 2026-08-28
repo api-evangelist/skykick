@@ -1,0 +1,30 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  Web search for a SkyKick / ConnectWise Cloud Services MCP server, plus probes of
+  the developer portal, the API gateway and the npm registry on 2026-08-28.
+status: none
+note: >-
+  No MCP server exists for SkyKick, hosted or local. No endpoint is advertised on
+  the developer portal, no @skykick or @connectwise MCP package is on npm, and no
+  agent card was found on any host (all /.well-known/agent-card.json and
+  /.well-known/agent.json probes returned 404). No candidate tool list is derived
+  either, because there is no OpenAPI to derive one from — SkyKick publishes no
+  machine-readable contract at all. This file records a searched absence; no
+  MCPServer pointer is wired into apis.yml, because emitting one would assert an
+  agent surface the provider does not serve.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+tools: []
+blockers:
+- No published OpenAPI, GraphQL SDL, AsyncAPI or WSDL to project tools from.
+- The API reference is behind the developer-portal sign-in, so operation names and
+  input schemas are not readable anonymously.
+- Credentials cannot be self-provisioned; an administrator of an existing partner
+  tenant must enable Developer Access first, which rules out an unattended agent
+  onboarding path.

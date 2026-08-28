@@ -1,0 +1,29 @@
+generated: '2026-08-28'
+method: searched
+source: https://www.connectwise.com/pricing
+docs: https://www.connectwise.com/pricing
+note: >-
+  No plans are published. SkyKick's own pricing page died with skykick.com, and the
+  successor products — ConnectWise Cloud Backup and ConnectWise SaaS Security — are
+  quote-only on the ConnectWise pricing page: every product tile routes to a
+  "Request a Quote" form rather than a tier with a number on it. There is no
+  published per-seat rate, no included quota, no overage schedule and no free tier;
+  a free trial is offered but its terms are not stated publicly. Recorded as
+  plan_count 0 with this note rather than omitted, because the absence is the
+  finding.
+plan_count: 0
+plans: []
+pricing_model: quote-only
+free_trial:
+  offered: true
+  terms_published: false
+api_pricing:
+  metered: false
+  note: >-
+    The Partner Integration API is not separately priced or metered on any
+    published page. It appears to be an entitlement of a partner subscription
+    rather than a billable product, but no page states that, so it is not asserted.
+probed:
+  url: https://www.connectwise.com/pricing
+  status: 200
+  date: '2026-08-28'

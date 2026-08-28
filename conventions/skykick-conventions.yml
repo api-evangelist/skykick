@@ -1,0 +1,99 @@
+generated: '2026-08-28'
+method: searched
+source: https://skykick.developer.azure-api.net/getstarted
+docs: https://skykick.developer.azure-api.net/getstarted
+api: SkyKick Partner Integration API
+base_url: https://apis.cloudservices.connectwise.com
+note: >-
+  Assembled from the provider's public Get Started page plus live anonymous probes
+  of the gateway on 2026-08-28. SkyKick publishes no OpenAPI, so every field below
+  is either quoted from that page or observed on the wire; anything neither of
+  those could establish is recorded as unknown rather than guessed.
+transport:
+  protocol: HTTPS
+  style: REST
+  gateway: Azure API Management
+  gateway_evidence: >-
+    Responses carry Request-Context: appId=cid-v1:ddd34b10-... and unauthenticated
+    unrouted paths return the APIM envelope {"statusCode":404,"message":"Resource not found"}.
+  backend: 'ASP.NET Web API (X-AspNet-Version: 4.0.30319, X-Powered-By: ASP.NET on /whoami)'
+  content_type: application/json
+auth_style:
+  model: dual credential
+  gateway_credential: 'Ocp-Apim-Subscription-Key: <subscription key>'
+  caller_credential: 'Authorization: Bearer <access token>'
+  token_endpoint: https://apis.cloudservices.connectwise.com/auth/token
+  grant: client_credentials
+  scopes: [Partner, Distributor]
+  detail: authentication/skykick-authentication.yml
+resource_paths:
+  identity: /whoami
+  backup_root: /Backup
+  note: >-
+    Only these two path roots are named on the anonymously readable surface. The
+    operation-level path list is behind the developer-portal sign-in.
+error_envelope:
+  observed: true
+  probed: '2026-08-28'
+  shapes:
+  - source: APIM gateway (unrouted path)
+    example: '{ "statusCode": 404, "message": "Resource not found" }'
+    fields: [statusCode, message]
+  - source: backend API (authorization failure)
+    example: '{"Message":"Authorization has been denied for this request."}'
+    fields: [Message]
+  rfc9457: false
+  note: >-
+    Two different envelopes are in play and they disagree on field casing —
+    lowercase statusCode/message from the APIM layer, PascalCase Message from the
+    ASP.NET backend. Neither is application/problem+json. A client must handle both.
+  detail: errors/skykick-problem-types.yml
+versioning:
+  scheme: unknown
+  note: >-
+    No version segment appears in any published path (/auth/token, /whoami,
+    /Backup) and no version header is documented. Whether versioning is handled by
+    APIM revisions is not stated publicly.
+pagination:
+  documented: false
+  note: Not documented on any anonymously readable page.
+idempotency:
+  supported: unknown
+  note: >-
+    No idempotency key header, retry semantics or replay guarantee is documented
+    on the public surface, and there is no OpenAPI to inspect. Recorded as unknown,
+    NOT as absent — and deliberately not wired as an Idempotency pointer in
+    apis.yml, because asserting support we cannot see would be a fabrication.
+rate_limit_signaling:
+  headers_observed: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header appeared on anonymous 401
+    or 404 responses. Azure APIM emits rate-limit headers only when a policy is
+    configured to; whether one is cannot be determined without a subscription key.
+  detail: rate-limits/skykick-rate-limits.yml
+request_id_tracing:
+  header: Request-Context
+  value_shape: 'appId=cid-v1:<guid>'
+  note: >-
+    Application Insights correlation header, present on every response. It
+    identifies the backend application, not the individual request, so it is not a
+    per-call trace id a partner can quote to support.
+dry_run_mode:
+  supported: unknown
+  note: Not documented on the public surface.
+reversibility:
+  state: unknown
+  grade: none
+  note: >-
+    SkyKick's products are backup, restore and migration — a domain where reversal
+    semantics matter more than most, since a restore is itself the reversal of a
+    data-loss event and a migration cutover is the classic irreversible write. The
+    provider documents none of it anonymously. No cancel, undo, rollback or restore
+    operation is named on the readable surface, no retention or grace window is
+    stated, and there is no OpenAPI to search for operationIds. This is recorded as
+    unknown rather than `na` because the API demonstrably has a write surface
+    (/Backup manages backup subscriptions), and it is not recorded as `documented`
+    because no reversal path has actually been shown to us. Establishing this
+    requires authenticated access to the gated API reference.
+  operations: []
+  windows: []
