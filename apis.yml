@@ -14,6 +14,17 @@ description: 'SkyKick is a Seattle-based cloud automation company whose Microsof
   developer access must be provisioned by an administrator inside the Cloud Services
   partner portal, so no OpenAPI, AsyncAPI, MCP server or agent card is published
   anonymously.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://avatars.githubusercontent.com/u/15131071?v=4
 url: https://raw.githubusercontent.com/api-evangelist/skykick/refs/heads/main/apis.yml
 x-type: company
