@@ -36,6 +36,16 @@ tags:
 - Company
 - Backup
 - Migration
+- Microsoft-365
+- Managed Service Providers
+- SaaS Security
+- Cloud Automation
+- Data Protection
+- Azure API Management
+tags_raw:
+- Company
+- Backup
+- Migration
 - Microsoft 365
 - Managed Service Providers
 - SaaS Security
@@ -55,6 +65,11 @@ apis:
   humanURL: https://skykick.developer.azure-api.net/getstarted
   baseURL: https://apis.cloudservices.connectwise.com
   tags:
+  - Backup
+  - Microsoft-365
+  - Partner Integration
+  - Authentication
+  tags_raw:
   - Backup
   - Microsoft 365
   - Partner Integration
