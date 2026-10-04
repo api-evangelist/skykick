@@ -51,7 +51,7 @@ tags:
 - Company
 - Backup
 - Migration
-- Microsoft-365
+- Microsoft 365
 - Managed Service Providers
 - SaaS Security
 - Cloud Automation
@@ -67,6 +67,7 @@ tags_raw:
 - Cloud Automation
 - Data Protection
 - Azure API Management
+- Microsoft-365
 apis:
 - name: SkyKick Partner Integration API
   description: 'The Partner Integration API is the SkyKick / ConnectWise Cloud Services
@@ -81,7 +82,7 @@ apis:
   baseURL: https://apis.cloudservices.connectwise.com
   tags:
   - Backup
-  - Microsoft-365
+  - Microsoft 365
   - Partner Integration
   - Authentication
   tags_raw:
@@ -89,6 +90,7 @@ apis:
   - Microsoft 365
   - Partner Integration
   - OAuth
+  - Microsoft-365
   properties:
   - type: Authentication
     url: authentication/skykick-authentication.yml
