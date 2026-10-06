@@ -46,7 +46,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.20'
 created: '2026-08-28'
-modified: '2026-08-28'
+modified: '2026-10-06'
 tags:
 - Company
 - Backup
@@ -108,6 +108,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://www.connectwise.com/blog
+  type: Blog
 - type: DomainSecurity
   url: security/skykick-domain-security.yml
 - type: Website
